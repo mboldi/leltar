@@ -2,8 +2,8 @@ package hu.bme.aut.leltar.data;
 
 public class Device {
     private String maker, type, basicName, details;
-
     private int value;
+    private boolean expanded = false;
 
     public Device() {
     }
@@ -53,5 +53,13 @@ public class Device {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 }
