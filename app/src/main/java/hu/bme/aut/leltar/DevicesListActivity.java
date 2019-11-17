@@ -20,17 +20,18 @@ public class DevicesListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dataHelper = new PersistentDataHelper(this);
+        dataHelper.open();
+
         setContentView(R.layout.activity_devices_list);
 
         list = findViewById(R.id.devicesList);
 
         list.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
+
         list.setLayoutManager(layoutManager);
-
-        dataHelper = new PersistentDataHelper(this);
-
-        dataHelper.open();
         deviceAdapter = new DeviceAdapter(dataHelper);
 
         list.setAdapter(deviceAdapter);
@@ -39,14 +40,12 @@ public class DevicesListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         dataHelper.open();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
         dataHelper.close();
     }
 }

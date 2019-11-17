@@ -43,12 +43,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
     }
 
     public DeviceAdapter(PersistentDataHelper dataHelper) {
-        /*for (int i = 0; i < 25; i++) {
-            Device tmp = new Device("Sony", "valami", "Eszköz " + i, i * 10000);
-            tmp.setDetails("Tulajdonsagok");
-            devices.add(tmp);
-        }*/
-
+        this.dataHelper = dataHelper;
         devices = dataHelper.restoreDevices();
     }
 
@@ -83,6 +78,15 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
 
                 notifyItemChanged(position);
                 lastChanged = position;
+            }
+        });
+
+        holder.btDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                devices.remove(device);
+                dataHelper.removeDevice(device);
+                notifyDataSetChanged();
             }
         });
     }

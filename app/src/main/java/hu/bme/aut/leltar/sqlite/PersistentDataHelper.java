@@ -88,4 +88,8 @@ public class PersistentDataHelper {
 
         return device;
     }
+
+    public void removeDevice(Device device) {
+        db.delete(DevicesTable.TABLE_DEVICES, DevicesTable.Columns._id.name() + "=" + device.get_id(), null);
+    }
 }
