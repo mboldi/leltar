@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button listButton;
+    Button listButton, showAddDeviceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent viewListIntent = new Intent();
                 viewListIntent.setClass(MainActivity.this, DevicesListActivity.class);
+                startActivity(viewListIntent);
+            }
+        });
+
+        showAddDeviceButton = findViewById(R.id.btShowAddDevice);
+        showAddDeviceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent viewListIntent = new Intent();
+                viewListIntent.setClass(MainActivity.this, AddDeviceActivity.class);
                 startActivity(viewListIntent);
             }
         });

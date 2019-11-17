@@ -2,8 +2,12 @@ package hu.bme.aut.leltar.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import hu.bme.aut.leltar.data.Device;
 
@@ -57,5 +61,31 @@ public class PersistentDataHelper {
         values.put(DevicesTable.Columns.value.name(), device.getValue());
 
         db.insert(DevicesTable.TABLE_DEVICES, null, values);
+    }
+
+    public List<Device> restoreDevices() {
+        final List<Device> devices = new ArrayList<>();
+        final Cursor cursor = db.query(DevicesTable.TABLE_DEVICES, deviceColumns, null, null, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            final Device device = cursonToDevice(cursor);
+            devices.add(device);
+            cursor.moveToNext();
+        }
+
+        return devices;
+    }
+
+    private Device cursonToDevice(Cursor cursor) {
+        final Device device = new Device();
+        device.set_id(cursor.getInt(DevicesTable.Columns._id.ordinal()));
+        device.setMaker(cursor.getString(DevicesTable.Columns.maker.ordinal()));
+        device.setType(cursor.getString(DevicesTable.Columns.type.ordinal()));
+        device.setBasicName(cursor.getString(DevicesTable.Columns.basic_name.ordinal()));
+        device.setDetails(cursor.getString(DevicesTable.Columns.details.ordinal()));
+        device.setValue(cursor.getInt(DevicesTable.Columns.value.ordinal()));
+        device.setExpanded(false);
+
+        return device;
     }
 }

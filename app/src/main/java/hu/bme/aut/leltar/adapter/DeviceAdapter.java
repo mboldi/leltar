@@ -14,11 +14,13 @@ import java.util.List;
 
 import hu.bme.aut.leltar.R;
 import hu.bme.aut.leltar.data.Device;
+import hu.bme.aut.leltar.sqlite.PersistentDataHelper;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder> {
 
     private List<Device> devices = new ArrayList<>();
     private int lastChanged = -1;
+    private PersistentDataHelper dataHelper;
 
     static class DeviceViewHolder extends RecyclerView.ViewHolder {
         TextView tvDeviceMaker, tvDeviceQuantity, tvDeviceBasicName, tvDeviceDetails, tvDeviceType;
@@ -40,12 +42,14 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
         }
     }
 
-    public DeviceAdapter() {
-        for (int i = 0; i < 25; i++) {
+    public DeviceAdapter(PersistentDataHelper dataHelper) {
+        /*for (int i = 0; i < 25; i++) {
             Device tmp = new Device("Sony", "valami", "Eszköz " + i, i * 10000);
             tmp.setDetails("Tulajdonsagok");
             devices.add(tmp);
-        }
+        }*/
+
+        devices = dataHelper.restoreDevices();
     }
 
     @NonNull
