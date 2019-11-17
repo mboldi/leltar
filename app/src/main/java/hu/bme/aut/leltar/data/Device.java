@@ -2,7 +2,7 @@ package hu.bme.aut.leltar.data;
 
 public class Device {
     private String maker, type, basicName, details;
-    private int value;
+    private int _id, value;
     private boolean expanded = false;
 
     public Device() {
@@ -13,6 +13,14 @@ public class Device {
         this.type = type;
         this.basicName = basicName;
         this.value = value;
+    }
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
     }
 
     public String getMaker() {
