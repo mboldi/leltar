@@ -46,6 +46,7 @@ public class AddDeviceActivity extends AppCompatActivity {
 
                 Intent viewListIntent = new Intent();
                 viewListIntent.setClass(AddDeviceActivity.this, DevicesListActivity.class);
+                viewListIntent.putExtra("alma", 3);
                 startActivity(viewListIntent);
             }
         });

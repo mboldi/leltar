@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import hu.bme.aut.leltar.adapter.DeviceAdapter;
 import hu.bme.aut.leltar.sqlite.PersistentDataHelper;
@@ -20,6 +21,9 @@ public class DevicesListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //String _id = getIntent().getStringExtra("alma");
+        //Log.d("TEST", _id);
 
         dataHelper = new PersistentDataHelper(this);
         dataHelper.open();

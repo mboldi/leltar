@@ -5,9 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +58,9 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DeviceViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final DeviceViewHolder holder, final int position) {
         final Device device = devices.get(position);
-        holder.tvDeviceQuantity.setText("10");
+        holder.tvDeviceQuantity.setText("");
         holder.tvDeviceType.setText(device.getType());
         holder.tvDeviceDetails.setText(device.getDetails());
         holder.tvDeviceMaker.setText(device.getMaker());
@@ -84,6 +87,9 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //String text = device.getBasicName() + " törölve";
+                //Snackbar.make(v, text, Snackbar.LENGTH_SHORT);
+
                 devices.remove(device);
                 dataHelper.removeDevice(device);
                 notifyDataSetChanged();

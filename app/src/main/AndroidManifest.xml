@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AddDeviceActivity"></activity>
+        <activity android:name=".AddDeviceActivity"
+            android:noHistory="true"></activity>
         <activity android:name=".DevicesListActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
