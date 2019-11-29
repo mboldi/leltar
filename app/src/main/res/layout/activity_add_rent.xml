@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:text="@string/devices"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintBottom_toTopOf="@+id/devicesInRent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
@@ -134,7 +134,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/devicesInRent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

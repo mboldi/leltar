@@ -21,7 +21,7 @@ import hu.bme.aut.leltar.sqlite.PersistentDataHelper;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder> {
 
-    private List<Device> devices = new ArrayList<>();
+    private List<Device> devices;
     private int lastChanged = -1;
     private PersistentDataHelper dataHelper;
 

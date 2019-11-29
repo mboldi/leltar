@@ -1,6 +1,8 @@
 package hu.bme.aut.leltar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -15,11 +17,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import hu.bme.aut.leltar.adapter.RentListDeviceAdapter;
+import hu.bme.aut.leltar.data.Device;
+
 public class AddRentActivity extends AppCompatActivity {
 
-    Button chooseOutDateButton, chooseBackDateButton;
-    TextView outDateTextbox, backDateTextbox;
-    EditText renterNameEdittext;
+    private Button chooseOutDateButton, chooseBackDateButton;
+    private TextView outDateTextbox, backDateTextbox;
+    private EditText renterNameEdittext;
+
+    private RecyclerView deviceList;
+    private RentListDeviceAdapter deviceAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +71,6 @@ public class AddRentActivity extends AppCompatActivity {
             }
         });
 
-
         chooseBackDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,5 +92,20 @@ public class AddRentActivity extends AppCompatActivity {
                 datePicker.show();
             }
         });
+
+        deviceList = findViewById(R.id.devicesInRent);
+        deviceList.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        deviceList.setLayoutManager(layoutManager);
+
+        deviceAdapter = new RentListDeviceAdapter();
+        deviceList.setAdapter(deviceAdapter);
+
+        Device tmp = new Device();
+        tmp.setMaker("Sony");
+        tmp.setType("PMW320");
+
+        deviceAdapter.addDevice(tmp);
     }
 }
