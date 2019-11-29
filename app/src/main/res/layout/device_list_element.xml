@@ -13,26 +13,26 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Gyártó"
         app:layout_constraintEnd_toStartOf="@+id/tvDeviceType"
-        app:layout_constraintTop_toTopOf="@+id/tvDeviceBasicName" />
+        app:layout_constraintTop_toTopOf="@+id/tvDeviceBasicName"
+        tools:text="Gyártó" />
 
     <TextView
         android:id="@+id/tvDeviceQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5 db"
         app:layout_constraintEnd_toEndOf="@+id/tvDeviceType"
-        app:layout_constraintTop_toTopOf="@+id/tvDeviceDetails" />
+        app:layout_constraintTop_toTopOf="@+id/tvDeviceDetails"
+        tools:text="5 db" />
 
     <TextView
         android:id="@+id/tvDeviceDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:text="Ezek itten a tulajdonságaim"
         app:layout_constraintStart_toStartOf="@+id/tvDeviceBasicName"
-        app:layout_constraintTop_toBottomOf="@+id/tvDeviceMaker" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDeviceMaker"
+        tools:text="Ezek itten a tulajdonságaim" />
 
     <TextView
         android:id="@+id/tvDeviceType"
@@ -40,9 +40,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="Típus"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvDeviceMaker" />
+        app:layout_constraintTop_toTopOf="@+id/tvDeviceMaker"
+        tools:text="Típus" />
 
     <TextView
         android:id="@+id/tvDeviceBasicName"
@@ -51,9 +51,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Eszköz beceneve"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Eszköz beceneve" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sub_item"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
-            android:text="Törlés"
+            android:text="@string/delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:text="Szerkesztés"
+            android:text="@string/edit"
             app:layout_constraintEnd_toStartOf="@+id/btDelete"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

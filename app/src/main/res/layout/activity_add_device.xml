@@ -4,27 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddDeviceActivity">
+    tools:context=".AddDeviceActivity"
+    android:padding="8dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Új eszköz hozzáadása"
+        android:text="@string/add_device"
         android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gyártó:"
+            android:text="@string/maker"
             android:textSize="20sp" />
 
         <EditText
@@ -38,15 +36,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Típus:"
+            android:text="@string/type"
             android:textSize="20sp" />
 
         <EditText
@@ -60,15 +56,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Egyszerű név:"
+            android:text="@string/basic_name"
             android:textSize="20sp" />
 
         <EditText
@@ -82,15 +76,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Érték:"
+            android:text="@string/value"
             android:textSize="20sp" />
 
         <EditText
@@ -105,15 +97,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="8dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Egyebek:"
+            android:text="@string/others"
             android:textSize="20sp" />
 
         <EditText
@@ -128,10 +118,9 @@
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="8dp"
-        android:text="Mentés"
+        android:text="@string/save"
         android:textSize="20sp" />
 
 </LinearLayout>

@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">LelTár</string>
-    <string name="devicelist_header">Eszközök:</string>
+    <string name="devices">Eszközök:</string>
+    <string name="new_rent">Új bérlés felvétele</string>
+    <string name="renter_name">Bérlő neve:</string>
+    <string name="given_by">Kiadta:</string>
+    <string name="out_date">Kivitel dátuma:</string>
+    <string name="choose_date">Dátum kiválasztása</string>
+    <string name="prop_backDate">Visszahozatal várható dátuma:</string>
+    <string name="add">Hozzáadás</string>
+    <string name="save">Mentés</string>
+    <string name="add_device">Új eszköz hozzáadása</string>
+    <string name="maker">Gyártó:</string>
+    <string name="type">Típus:</string>
+    <string name="basic_name">Egyszerű név:</string>
+    <string name="value">Érték:</string>
+    <string name="others">Egyebek:</string>
+    <string name="delete">Törlés</string>
+    <string name="edit">Szerkesztés</string>
 </resources>
