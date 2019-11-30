@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Rent {
     private int _id;
-    private boolean out, back;
+    private boolean out;
     private String outDate, propBackDate, actBackDate, givenBy, givenTo;
     private List<Device> devices;
 
@@ -27,14 +27,6 @@ public class Rent {
 
     public void setOut(boolean out) {
         this.out = out;
-    }
-
-    public boolean isBack() {
-        return back;
-    }
-
-    public void setBack(boolean back) {
-        this.back = back;
     }
 
     public String getOutDate() {
@@ -81,11 +73,11 @@ public class Rent {
         return devices;
     }
 
-    public void addDevice(Device device) {
-        devices.add(device);
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
     }
 
-    public void removeDevice(Device device) {
-        devices.remove(device);
+    public void addDevice(Device device) {
+        devices.add(device);
     }
 }

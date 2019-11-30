@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AddRentActivity"></activity>
+        <activity android:name=".RentListActivity"></activity>
+        <activity
+            android:name=".AddRentActivity"
+            android:noHistory="true" />
         <activity
             android:name=".AddDeviceActivity"
             android:noHistory="true" />

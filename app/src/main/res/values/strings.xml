@@ -19,4 +19,6 @@
     <string name="edit">Szerkesztés</string>
 
     <string name="back">Vissza</string>
+    <string name="rents">Bérlések</string>
+    <string name="new_text">Új</string>
 </resources>

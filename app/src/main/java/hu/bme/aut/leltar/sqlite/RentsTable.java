@@ -9,7 +9,6 @@ public class RentsTable {
     public enum Columns {
         _id,
         out,
-        back,
         out_date,
         prop_back_date,
         act_back_date,
@@ -20,10 +19,9 @@ public class RentsTable {
     private static final String DATABASE_CREATE = "create table " + TABLE_RENTS
             + "(" + Columns._id.name() + " integer primary key autoincrement, "
             + Columns.out.name() + " boolean not null, "
-            + Columns.back.name() + " boolean not null, "
             + Columns.out_date.name() + " text not null, "
             + Columns.prop_back_date.name() + " text not null, "
-            + Columns.act_back_date.name() + " text not null, "
+            + Columns.act_back_date.name() + " text, "
             + Columns.given_by.name() + " text not null, "
             + Columns.given_to.name() + " text not null);";
 

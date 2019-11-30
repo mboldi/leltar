@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,13 +22,14 @@ import java.util.Locale;
 
 import hu.bme.aut.leltar.adapter.RentListDeviceAdapter;
 import hu.bme.aut.leltar.data.Device;
+import hu.bme.aut.leltar.data.Rent;
 import hu.bme.aut.leltar.sqlite.PersistentDataHelper;
 
 public class AddRentActivity extends AppCompatActivity {
 
-    private Button chooseOutDateButton, chooseBackDateButton, addDeviceButton;
+    private Button chooseOutDateButton, chooseBackDateButton, addDeviceButton, saveRentButton;
     private TextView outDateTextbox, backDateTextbox;
-    private EditText renterNameEdittext;
+    private EditText renterNameEdittext, giverNameEdittext;
 
     private RecyclerView deviceList;
     private RentListDeviceAdapter deviceAdapter;
@@ -35,7 +37,7 @@ public class AddRentActivity extends AppCompatActivity {
 
     private PersistentDataHelper dataHelper;
 
-    private List<Device> devices, devicesInRent;
+    private List<Device> devices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +50,14 @@ public class AddRentActivity extends AppCompatActivity {
         chooseOutDateButton = findViewById(R.id.btChooseOutDate);
         chooseBackDateButton = findViewById(R.id.btChooseBackDate);
         addDeviceButton = findViewById(R.id.btAddDevices);
+        saveRentButton = findViewById(R.id.btnSaveRent);
 
         renterNameEdittext = findViewById(R.id.etRenter);
+        giverNameEdittext = findViewById(R.id.etGivenBy);
 
         dataHelper = new PersistentDataHelper(this);
         dataHelper.open();
         devices = dataHelper.restoreDevices();
-
 
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy. MM. dd.", Locale.GERMAN);
@@ -111,6 +114,24 @@ public class AddRentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 PopupController popupController = new PopupController();
                 popupController.showPopupWindow(v, devices, deviceAdapter);
+            }
+        });
+
+        saveRentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Rent rent = new Rent();
+                rent.setGivenTo(renterNameEdittext.getText().toString());
+                rent.setGivenBy(giverNameEdittext.getText().toString());
+                rent.setOutDate(outDateTextbox.getText().toString());
+                rent.setPropBackDate(backDateTextbox.getText().toString());
+                rent.setDevices(devices);
+
+                dataHelper.persistRent(rent);
+
+                Intent viewMain = new Intent();
+                viewMain.setClass(AddRentActivity.this, MainActivity.class);
+                startActivity(viewMain);
             }
         });
 
