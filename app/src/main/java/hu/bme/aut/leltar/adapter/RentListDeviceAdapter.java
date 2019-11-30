@@ -69,4 +69,8 @@ public class RentListDeviceAdapter extends RecyclerView.Adapter<RentListDeviceAd
         devices.add(device);
         notifyDataSetChanged();
     }
+
+    public List<Device> getDevices() {
+        return devices;
+    }
 }

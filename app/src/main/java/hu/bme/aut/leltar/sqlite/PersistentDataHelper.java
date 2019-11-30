@@ -109,8 +109,8 @@ public class PersistentDataHelper {
 
         for (Device device : rent.getDevices()) {
             final ContentValues linkValues = new ContentValues();
-            values.put(DevicesOfRent.Columns.rent_id.name(), rentId);
-            values.put(DevicesOfRent.Columns.device_id.name(), device.get_id());
+            linkValues.put(DevicesOfRent.Columns.rent_id.name(), rentId);
+            linkValues.put(DevicesOfRent.Columns.device_id.name(), device.get_id());
 
             db.insert(DevicesOfRent.TABLE_DEVICES_OF_RENTS, null, linkValues);
         }

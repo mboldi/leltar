@@ -80,4 +80,5 @@ public class Rent {
     public void addDevice(Device device) {
         devices.add(device);
     }
+
 }

@@ -125,7 +125,7 @@ public class AddRentActivity extends AppCompatActivity {
                 rent.setGivenBy(giverNameEdittext.getText().toString());
                 rent.setOutDate(outDateTextbox.getText().toString());
                 rent.setPropBackDate(backDateTextbox.getText().toString());
-                rent.setDevices(devices);
+                rent.setDevices(deviceAdapter.getDevices());
 
                 dataHelper.persistRent(rent);
 
