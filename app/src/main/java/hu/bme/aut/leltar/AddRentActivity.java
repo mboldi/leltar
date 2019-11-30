@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -112,7 +111,7 @@ public class AddRentActivity extends AppCompatActivity {
         addDeviceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupController popupController = new PopupController();
+                DeviceAdderPopupController popupController = new DeviceAdderPopupController();
                 popupController.showPopupWindow(v, devices, deviceAdapter);
             }
         });

@@ -20,7 +20,7 @@ import hu.bme.aut.leltar.adapter.DeviceChooserAdapter;
 import hu.bme.aut.leltar.adapter.RentListDeviceAdapter;
 import hu.bme.aut.leltar.data.Device;
 
-public class PopupController {
+public class DeviceAdderPopupController {
 
     private RecyclerView list;
     private RecyclerView.Adapter deviceAdapter;

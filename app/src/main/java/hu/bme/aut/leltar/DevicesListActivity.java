@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import hu.bme.aut.leltar.adapter.DeviceAdapter;
 import hu.bme.aut.leltar.sqlite.PersistentDataHelper;
@@ -18,6 +21,7 @@ public class DevicesListActivity extends AppCompatActivity {
 
     private PersistentDataHelper dataHelper;
 
+    Button addDeviceButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,16 @@ public class DevicesListActivity extends AppCompatActivity {
 
         deviceAdapter = new DeviceAdapter(dataHelper);
         list.setAdapter(deviceAdapter);
+
+        addDeviceButton = findViewById(R.id.btnAddDeviceOnListActivity);
+        addDeviceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addDeviceIntent = new Intent();
+                addDeviceIntent.setClass(DevicesListActivity.this, AddRentActivity.class);
+                startActivity(addDeviceIntent);
+            }
+        });
     }
 
     @Override
