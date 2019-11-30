@@ -17,7 +17,7 @@ import hu.bme.aut.leltar.data.Device;
 
 public class RentListDeviceAdapter extends RecyclerView.Adapter<RentListDeviceAdapter.RentListDeviceViewHolder> {
 
-    private List<Device> devices;
+    private List<Device> devices, devicesToRent;
 
     static class RentListDeviceViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,8 +32,9 @@ public class RentListDeviceAdapter extends RecyclerView.Adapter<RentListDeviceAd
         }
     }
 
-    public RentListDeviceAdapter() {
+    public RentListDeviceAdapter(List<Device> devicesToRent) {
         devices = new ArrayList<>();
+        this.devicesToRent = devicesToRent;
     }
 
     @NonNull
@@ -51,6 +52,8 @@ public class RentListDeviceAdapter extends RecyclerView.Adapter<RentListDeviceAd
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                devicesToRent.add(device);
+
                 devices.remove(device);
                 notifyDataSetChanged();
             }
@@ -65,9 +68,5 @@ public class RentListDeviceAdapter extends RecyclerView.Adapter<RentListDeviceAd
     public void addDevice(Device device) {
         devices.add(device);
         notifyDataSetChanged();
-    }
-
-    public int asd() {
-        return 3;
     }
 }

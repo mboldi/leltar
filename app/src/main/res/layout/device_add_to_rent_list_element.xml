@@ -4,25 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="4dp">
 
     <TextView
-        android:id="@+id/tvDeviceNameRentList"
+        android:id="@+id/tvDeviceNameChooser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/ibtDeleteFromRentList"
+        app:layout_constraintBottom_toBottomOf="@+id/btAddDeviceToRent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Eszköz neve" />
+        tools:text="Cumó neve" />
 
-    <ImageButton
-        android:id="@+id/ibtDeleteFromRentList"
+    <Button
+        android:id="@+id/btAddDeviceToRent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="trash_icon"
-        android:hapticFeedbackEnabled="false"
+        android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/trash_24" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

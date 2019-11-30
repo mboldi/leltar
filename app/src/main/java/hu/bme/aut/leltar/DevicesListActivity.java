@@ -31,13 +31,12 @@ public class DevicesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_devices_list);
 
         list = findViewById(R.id.devicesList);
-
         list.setHasFixedSize(true);
+
         layoutManager = new LinearLayoutManager(this);
-
         list.setLayoutManager(layoutManager);
-        deviceAdapter = new DeviceAdapter(dataHelper);
 
+        deviceAdapter = new DeviceAdapter(dataHelper);
         list.setAdapter(deviceAdapter);
     }
 

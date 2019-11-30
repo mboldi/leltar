@@ -17,4 +17,6 @@
     <string name="others">Egyebek:</string>
     <string name="delete">Törlés</string>
     <string name="edit">Szerkesztés</string>
+
+    <string name="back">Vissza</string>
 </resources>

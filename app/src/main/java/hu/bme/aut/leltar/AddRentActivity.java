@@ -13,22 +13,29 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import hu.bme.aut.leltar.adapter.RentListDeviceAdapter;
 import hu.bme.aut.leltar.data.Device;
+import hu.bme.aut.leltar.sqlite.PersistentDataHelper;
 
 public class AddRentActivity extends AppCompatActivity {
 
-    private Button chooseOutDateButton, chooseBackDateButton;
+    private Button chooseOutDateButton, chooseBackDateButton, addDeviceButton;
     private TextView outDateTextbox, backDateTextbox;
     private EditText renterNameEdittext;
 
     private RecyclerView deviceList;
     private RentListDeviceAdapter deviceAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    private PersistentDataHelper dataHelper;
+
+    private List<Device> devices, devicesInRent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +47,14 @@ public class AddRentActivity extends AppCompatActivity {
 
         chooseOutDateButton = findViewById(R.id.btChooseOutDate);
         chooseBackDateButton = findViewById(R.id.btChooseBackDate);
+        addDeviceButton = findViewById(R.id.btAddDevices);
 
         renterNameEdittext = findViewById(R.id.etRenter);
+
+        dataHelper = new PersistentDataHelper(this);
+        dataHelper.open();
+        devices = dataHelper.restoreDevices();
+
 
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy. MM. dd.", Locale.GERMAN);
@@ -93,19 +106,39 @@ public class AddRentActivity extends AppCompatActivity {
             }
         });
 
+        addDeviceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupController popupController = new PopupController();
+                popupController.showPopupWindow(v, devices, deviceAdapter);
+            }
+        });
+
         deviceList = findViewById(R.id.devicesInRent);
         deviceList.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
         deviceList.setLayoutManager(layoutManager);
 
-        deviceAdapter = new RentListDeviceAdapter();
+        deviceAdapter = new RentListDeviceAdapter(devices);
         deviceList.setAdapter(deviceAdapter);
-
+/*
         Device tmp = new Device();
         tmp.setMaker("Sony");
         tmp.setType("PMW320");
 
-        deviceAdapter.addDevice(tmp);
+        deviceAdapter.addDevice(tmp);*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dataHelper.open();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dataHelper.close();
     }
 }
