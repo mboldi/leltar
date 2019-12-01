@@ -26,4 +26,9 @@
     <string name="is_back">Visszajött</string>
     <string name="act_back_date">Visszajött ekkor:</string>
     <string name="undo">Visszavonás</string>
+    <string name="device_list">Eszközlista</string>
+    <string name="list_of_rents">Bérlések listája</string>
+    <string name="title">LelTár - leltározó és bérlésmenedzser</string>
+    <string name="manage_devices">Eszközök kezelése</string>
+    <string name="manage_rents">Bérlések kezelése</string>
 </resources>
