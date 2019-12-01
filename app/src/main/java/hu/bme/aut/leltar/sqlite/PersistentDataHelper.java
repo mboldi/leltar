@@ -163,4 +163,17 @@ public class PersistentDataHelper {
 
         return deviceIds;
     }
+
+    public void updateRent(Rent rent) {
+        final ContentValues values = new ContentValues();
+        values.put(RentsTable.Columns.given_to.name(), rent.getGivenTo());
+        values.put(RentsTable.Columns.given_by.name(), rent.getGivenBy());
+        values.put(RentsTable.Columns.out_date.name(), rent.getOutDate());
+        values.put(RentsTable.Columns.prop_back_date.name(), rent.getPropBackDate());
+        values.put(RentsTable.Columns.act_back_date.name(), rent.getActBackDate());
+        values.put(RentsTable.Columns.out.name(), rent.isOut());
+
+
+        db.update(RentsTable.TABLE_RENTS, values, "_id=" + rent.get_id(), null);
+    }
 }

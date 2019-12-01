@@ -142,12 +142,6 @@ public class AddRentActivity extends AppCompatActivity {
 
         deviceAdapter = new RentListDeviceAdapter(devices);
         deviceList.setAdapter(deviceAdapter);
-/*
-        Device tmp = new Device();
-        tmp.setMaker("Sony");
-        tmp.setType("PMW320");
-
-        deviceAdapter.addDevice(tmp);*/
     }
 
     @Override

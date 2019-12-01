@@ -70,12 +70,19 @@ public class RentListAdapter extends RecyclerView.Adapter<RentListAdapter.RentLi
 
         holder.itemView.setBackgroundColor(rent.isOut() ? Color.rgb(255, 213, 79) : Color.rgb(76, 175, 80));
 
+        final RentListAdapter tmp = this;
+
         holder.openRentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupController.showPopupWindow(v, rent);
+                popupController.showPopupWindow(v, rent, dataHelper, tmp);
             }
         });
+    }
+
+    public void dbChanged() {
+        rents = dataHelper.restoreRents();
+        notifyDataSetChanged();
     }
 
     @Override
