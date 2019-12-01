@@ -84,7 +84,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                         viewListIntent.setClass(AddDeviceActivity.this, DevicesListActivity.class);
                         startActivity(viewListIntent);
                     } else {
-                        Toast.makeText(v.getContext(), "Add meg az eszköz gyártóját és típusát!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(), "Add meg az eszköz gyártóját, típusát és értékét!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -93,7 +93,8 @@ public class AddDeviceActivity extends AppCompatActivity {
 
     private boolean necessaryNotEmpty() {
         return !(etMaker.getText().toString().isEmpty() ||
-                etType.getText().toString().isEmpty());
+                etType.getText().toString().isEmpty() ||
+                etValue.getText().toString().isEmpty());
     }
 
     @Override
