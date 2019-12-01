@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import hu.bme.aut.leltar.data.Device;
 import hu.bme.aut.leltar.sqlite.PersistentDataHelper;
@@ -34,7 +35,7 @@ public class AddDeviceActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
 
         int device_id;
-        if(getIntent().hasExtra("device_id")) {
+        if (getIntent().hasExtra("device_id")) {
             device_id = getIntent().getExtras().getInt("device_id");
 
             final Device device = dataHelper.restoreDevice(device_id);
@@ -48,41 +49,51 @@ public class AddDeviceActivity extends AppCompatActivity {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    device.setMaker(etMaker.getText().toString());
-                    device.setType(etType.getText().toString());
-                    device.setBasicName(etBasicName.getText().toString());
-                    device.setDetails(etDetails.getText().toString());
-                    device.setValue(Integer.parseInt(etValue.getText().toString()));
+                    if (necessaryNotEmpty()) {
+                        device.setMaker(etMaker.getText().toString());
+                        device.setType(etType.getText().toString());
+                        device.setBasicName(etBasicName.getText().toString());
+                        device.setDetails(etDetails.getText().toString());
+                        device.setValue(Integer.parseInt(etValue.getText().toString()));
 
-                    dataHelper.updateDevice(device);
+                        dataHelper.updateDevice(device);
 
-                    Intent viewListIntent = new Intent();
-                    viewListIntent.setClass(AddDeviceActivity.this, DevicesListActivity.class);
-                    startActivity(viewListIntent);
+                        Intent viewListIntent = new Intent();
+                        viewListIntent.setClass(AddDeviceActivity.this, DevicesListActivity.class);
+                        startActivity(viewListIntent);
+                    } else {
+                        Toast.makeText(v.getContext(), "Add meg az eszköz gyártóját és típusát!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
-        }
-        else {
+        } else {
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Device device = new Device();
-                    device.setMaker(etMaker.getText().toString());
-                    device.setType(etType.getText().toString());
-                    device.setBasicName(etBasicName.getText().toString());
-                    device.setDetails(etDetails.getText().toString());
-                    device.setValue(Integer.parseInt(etValue.getText().toString()));
+                    if (necessaryNotEmpty()) {
+                        Device device = new Device();
+                        device.setMaker(etMaker.getText().toString());
+                        device.setType(etType.getText().toString());
+                        device.setBasicName(etBasicName.getText().toString());
+                        device.setDetails(etDetails.getText().toString());
+                        device.setValue(Integer.parseInt(etValue.getText().toString()));
 
-                    dataHelper.persistDevice(device);
+                        dataHelper.persistDevice(device);
 
-                    Intent viewListIntent = new Intent();
-                    viewListIntent.setClass(AddDeviceActivity.this, DevicesListActivity.class);
-                    startActivity(viewListIntent);
+                        Intent viewListIntent = new Intent();
+                        viewListIntent.setClass(AddDeviceActivity.this, DevicesListActivity.class);
+                        startActivity(viewListIntent);
+                    } else {
+                        Toast.makeText(v.getContext(), "Add meg az eszköz gyártóját és típusát!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }
+    }
 
-
+    private boolean necessaryNotEmpty() {
+        return !(etMaker.getText().toString().isEmpty() ||
+                etType.getText().toString().isEmpty());
     }
 
     @Override

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -119,18 +120,26 @@ public class AddRentActivity extends AppCompatActivity {
         saveRentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Rent rent = new Rent();
-                rent.setGivenTo(renterNameEdittext.getText().toString());
-                rent.setGivenBy(giverNameEdittext.getText().toString());
-                rent.setOutDate(outDateTextbox.getText().toString());
-                rent.setPropBackDate(backDateTextbox.getText().toString());
-                rent.setDevices(deviceAdapter.getDevices());
+                if(necessaryNotEmpty()) {
+                    Rent rent = new Rent();
+                    rent.setGivenTo(renterNameEdittext.getText().toString());
+                    rent.setGivenBy(giverNameEdittext.getText().toString());
+                    rent.setOutDate(outDateTextbox.getText().toString());
+                    rent.setPropBackDate(backDateTextbox.getText().toString());
+                    rent.setDevices(deviceAdapter.getDevices());
 
-                dataHelper.persistRent(rent);
+                    dataHelper.persistRent(rent);
 
-                Intent viewMain = new Intent();
-                viewMain.setClass(AddRentActivity.this, MainActivity.class);
-                startActivity(viewMain);
+                    Intent viewMain = new Intent();
+                    viewMain.setClass(AddRentActivity.this, MainActivity.class);
+                    startActivity(viewMain);
+                }
+                else if(deviceAdapter.getItemCount() == 0) {
+                    Toast.makeText(v.getContext(), "Adj hozzá a rendeléshez eszközöket!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(v.getContext(), "Add meg a bérbevevő és -adó nevét!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -142,6 +151,12 @@ public class AddRentActivity extends AppCompatActivity {
 
         deviceAdapter = new RentListDeviceAdapter(devices);
         deviceList.setAdapter(deviceAdapter);
+    }
+
+    public boolean necessaryNotEmpty() {
+        return !(renterNameEdittext.getText().toString().isEmpty() ||
+                giverNameEdittext.getText().toString().isEmpty() ||
+                deviceAdapter.getItemCount() == 0);
     }
 
     @Override
