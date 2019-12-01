@@ -22,10 +22,14 @@ public class RentListActivity extends AppCompatActivity {
 
     private Button addRentButton;
 
+    private ViewRentPopupController popupController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent_list);
+
+        popupController = new ViewRentPopupController();
 
         addRentButton = findViewById(R.id.btnRentListNewRent);
 
@@ -47,7 +51,7 @@ public class RentListActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(layoutManager);
 
-        rentAdapter = new RentListAdapter(dataHelper);
+        rentAdapter = new RentListAdapter(dataHelper, popupController);
         list.setAdapter(rentAdapter);
     }
 

@@ -13,13 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import hu.bme.aut.leltar.R;
+import hu.bme.aut.leltar.ViewRentPopupController;
 import hu.bme.aut.leltar.data.Rent;
 import hu.bme.aut.leltar.sqlite.PersistentDataHelper;
 
 public class RentListAdapter extends RecyclerView.Adapter<RentListAdapter.RentListViewholder> {
 
-    PersistentDataHelper dataHelper;
-    List<Rent> rents;
+    private PersistentDataHelper dataHelper;
+    private List<Rent> rents;
+
+    private ViewRentPopupController popupController;
 
     static class RentListViewholder extends RecyclerView.ViewHolder {
         TextView givenToTextview, intervalTextview, amountTextview;
@@ -43,9 +46,11 @@ public class RentListAdapter extends RecyclerView.Adapter<RentListAdapter.RentLi
         }
     }
 
-    public RentListAdapter(PersistentDataHelper dataHelper) {
+    public RentListAdapter(PersistentDataHelper dataHelper, ViewRentPopupController popupController) {
         this.dataHelper = dataHelper;
         rents = dataHelper.restoreRents();
+
+        this.popupController = popupController;
     }
 
     @NonNull
@@ -63,8 +68,14 @@ public class RentListAdapter extends RecyclerView.Adapter<RentListAdapter.RentLi
                 (rent.isOut() ? (rent.getPropBackDate() + "(?)") : rent.getActBackDate()));
         holder.givenToTextview.setText(rent.getGivenTo());
 
-        holder.itemView.setBackgroundColor(rent.isOut()? Color.rgb(255, 213, 79) : Color.rgb(76, 175, 80));
+        holder.itemView.setBackgroundColor(rent.isOut() ? Color.rgb(255, 213, 79) : Color.rgb(76, 175, 80));
 
+        holder.openRentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupController.showPopupWindow(v, rent);
+            }
+        });
     }
 
     @Override

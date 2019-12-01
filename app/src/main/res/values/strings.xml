@@ -22,4 +22,7 @@
     <string name="rents">Bérlések</string>
     <string name="new_text">Új</string>
     <string name="open">Megnyitás</string>
+    <string name="get_back">Visszavétel</string>
+    <string name="is_back">Visszajött</string>
+    <string name="act_back_date">Visszajött ekkor:</string>
 </resources>
