@@ -26,9 +26,6 @@ public class DevicesListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //String _id = getIntent().getStringExtra("alma");
-        //Log.d("TEST", _id);
-
         dataHelper = new PersistentDataHelper(this);
         dataHelper.open();
 
@@ -40,7 +37,7 @@ public class DevicesListActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(layoutManager);
 
-        deviceAdapter = new DeviceAdapter(dataHelper);
+        deviceAdapter = new DeviceAdapter(dataHelper, this);
         list.setAdapter(deviceAdapter);
 
         addDeviceButton = findViewById(R.id.btnAddDeviceOnListActivity);
@@ -48,7 +45,7 @@ public class DevicesListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent addDeviceIntent = new Intent();
-                addDeviceIntent.setClass(DevicesListActivity.this, AddRentActivity.class);
+                addDeviceIntent.setClass(DevicesListActivity.this, AddDeviceActivity.class);
                 startActivity(addDeviceIntent);
             }
         });

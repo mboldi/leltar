@@ -1,20 +1,21 @@
 package hu.bme.aut.leltar.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import hu.bme.aut.leltar.AddDeviceActivity;
+import hu.bme.aut.leltar.DevicesListActivity;
 import hu.bme.aut.leltar.R;
 import hu.bme.aut.leltar.data.Device;
 import hu.bme.aut.leltar.sqlite.PersistentDataHelper;
@@ -24,6 +25,8 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
     private List<Device> devices;
     private int lastChanged = -1;
     private PersistentDataHelper dataHelper;
+
+    private DevicesListActivity activity;
 
     static class DeviceViewHolder extends RecyclerView.ViewHolder {
         TextView tvDeviceMaker, tvDeviceQuantity, tvDeviceBasicName, tvDeviceDetails, tvDeviceType;
@@ -45,9 +48,11 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
         }
     }
 
-    public DeviceAdapter(PersistentDataHelper dataHelper) {
+    public DeviceAdapter(PersistentDataHelper dataHelper, DevicesListActivity devicesListActivity) {
         this.dataHelper = dataHelper;
         devices = dataHelper.restoreDevices();
+
+        activity = devicesListActivity;
     }
 
     @NonNull
@@ -84,14 +89,42 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
             }
         });
 
+        holder.btEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent editDeviceIntent = new Intent();
+                editDeviceIntent.setClass(activity, AddDeviceActivity.class);
+                editDeviceIntent.putExtra("device_id", device.get_id());
+
+                activity.startActivity(editDeviceIntent);
+            }
+        });
+
         holder.btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //String text = device.getBasicName() + " törölve";
-                //Snackbar.make(v, text, Snackbar.LENGTH_SHORT);
+                String text = device.getBasicName() + " törölve";
+                Snackbar snackbar = Snackbar.make(v, text, Snackbar.LENGTH_LONG);
+                snackbar.setAction(R.string.undo, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        devices.add(device);
+                        notifyDataSetChanged();
+                    }
+                });
+
+                snackbar.setCallback( new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar transientBottomBar, int event) {
+                        super.onDismissed(transientBottomBar, event);
+                        if(!devices.contains(device))
+                            dataHelper.removeDevice(device);
+                    }
+                });
+
+                snackbar.show();
 
                 devices.remove(device);
-                dataHelper.removeDevice(device);
                 notifyDataSetChanged();
             }
         });

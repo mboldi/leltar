@@ -25,4 +25,5 @@
     <string name="get_back">Visszavétel</string>
     <string name="is_back">Visszajött</string>
     <string name="act_back_date">Visszajött ekkor:</string>
+    <string name="undo">Visszavonás</string>
 </resources>

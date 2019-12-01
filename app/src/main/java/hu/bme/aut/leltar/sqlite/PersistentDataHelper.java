@@ -174,6 +174,27 @@ public class PersistentDataHelper {
         values.put(RentsTable.Columns.out.name(), rent.isOut());
 
 
-        db.update(RentsTable.TABLE_RENTS, values, "_id=" + rent.get_id(), null);
+        db.update(RentsTable.TABLE_RENTS, values, RentsTable.Columns._id.name() + " = " + rent.get_id(), null);
+    }
+
+    public Device restoreDevice(int device_id) {
+        final  Cursor cursor = db.rawQuery("select * from " + DevicesTable.TABLE_DEVICES + " where " + DevicesTable.Columns._id.name() + " = " + device_id, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            return cursorToDevice(cursor);
+        }
+        return null;
+    }
+
+    public void updateDevice(Device device) {
+        final ContentValues values = new ContentValues();
+        values.put(DevicesTable.Columns.maker.name(), device.getMaker());
+        values.put(DevicesTable.Columns.type.name(), device.getType());
+        values.put(DevicesTable.Columns.basic_name.name(), device.getBasicName());
+        values.put(DevicesTable.Columns.details.name(), device.getDetails());
+        values.put(DevicesTable.Columns.value.name(), device.getValue());
+
+        db.update(DevicesTable.TABLE_DEVICES, values, DevicesTable.Columns._id.name() + " = " + device.get_id(), null);
     }
 }
